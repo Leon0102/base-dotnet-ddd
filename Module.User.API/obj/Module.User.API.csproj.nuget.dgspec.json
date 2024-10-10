@@ -1,0 +1,202 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/savvycom/Projects/Biz-BE/Module.User.API/Module.User.API.csproj": {}
+  },
+  "projects": {
+    "/Users/savvycom/Projects/Biz-BE/Database/Database.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/savvycom/Projects/Biz-BE/Database/Database.csproj",
+        "projectName": "Database",
+        "projectPath": "/Users/savvycom/Projects/Biz-BE/Database/Database.csproj",
+        "packagesPath": "/Users/savvycom/.nuget/packages/",
+        "outputPath": "/Users/savvycom/Projects/Biz-BE/Database/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/savvycom/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.8, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/opt/homebrew/Cellar/dotnet/8.0.8_1/libexec/sdk/8.0.108/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/savvycom/Projects/Biz-BE/Module.User.API/Module.User.API.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/savvycom/Projects/Biz-BE/Module.User.API/Module.User.API.csproj",
+        "projectName": "Module.User.API",
+        "projectPath": "/Users/savvycom/Projects/Biz-BE/Module.User.API/Module.User.API.csproj",
+        "packagesPath": "/Users/savvycom/.nuget/packages/",
+        "outputPath": "/Users/savvycom/Projects/Biz-BE/Module.User.API/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/savvycom/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/Users/savvycom/Projects/Biz-BE/Module.User.Domain/Module.User.Domain.csproj": {
+                "projectPath": "/Users/savvycom/Projects/Biz-BE/Module.User.Domain/Module.User.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "MediatR": {
+              "target": "Package",
+              "version": "[12.4.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/opt/homebrew/Cellar/dotnet/8.0.8_1/libexec/sdk/8.0.108/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/savvycom/Projects/Biz-BE/Module.User.Domain/Module.User.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/savvycom/Projects/Biz-BE/Module.User.Domain/Module.User.Domain.csproj",
+        "projectName": "Module.User.Domain",
+        "projectPath": "/Users/savvycom/Projects/Biz-BE/Module.User.Domain/Module.User.Domain.csproj",
+        "packagesPath": "/Users/savvycom/.nuget/packages/",
+        "outputPath": "/Users/savvycom/Projects/Biz-BE/Module.User.Domain/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/savvycom/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/Users/savvycom/Projects/Biz-BE/Database/Database.csproj": {
+                "projectPath": "/Users/savvycom/Projects/Biz-BE/Database/Database.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.8, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/opt/homebrew/Cellar/dotnet/8.0.8_1/libexec/sdk/8.0.108/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

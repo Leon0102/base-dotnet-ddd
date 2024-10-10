@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "WsexhhDHso4=",
+  "success": true,
+  "projectFilePath": "/Users/savvycom/Projects/Biz-BE/Email/Email.csproj",
+  "expectedPackageFiles": [
+    "/Users/savvycom/.nuget/packages/microsoft.netcore.app.ref/8.0.8/microsoft.netcore.app.ref.8.0.8.nupkg.sha512",
+    "/Users/savvycom/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.8/microsoft.aspnetcore.app.ref.8.0.8.nupkg.sha512",
+    "/Users/savvycom/.nuget/packages/microsoft.netcore.app.host.osx-arm64/8.0.8/microsoft.netcore.app.host.osx-arm64.8.0.8.nupkg.sha512"
+  ],
+  "logs": []
+}

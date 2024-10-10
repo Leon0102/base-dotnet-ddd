@@ -1,0 +1,12 @@
+﻿services:
+  biz-be:
+    image: biz-be
+    build:
+      context: .
+      dockerfile: Biz-BE/Dockerfile
+
+  api:
+    image: api
+    build:
+      context: .
+      dockerfile: API/Dockerfile
