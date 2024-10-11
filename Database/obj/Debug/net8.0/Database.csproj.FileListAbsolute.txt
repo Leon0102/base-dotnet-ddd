@@ -18,3 +18,13 @@
 /Users/savvycom/Projects/Biz-BE/Database/obj/Debug/net8.0/refint/Database.dll
 /Users/savvycom/Projects/Biz-BE/Database/obj/Debug/net8.0/Database.pdb
 /Users/savvycom/Projects/Biz-BE/Database/obj/Debug/net8.0/ref/Database.dll
+/Users/savvycom/Projects/Biz-BE/Database/bin/Debug/net8.0/Domain.Users.dll
+/Users/savvycom/Projects/Biz-BE/Database/bin/Debug/net8.0/Shared.Domain.dll
+/Users/savvycom/Projects/Biz-BE/Database/bin/Debug/net8.0/Shared.Infra.dll
+/Users/savvycom/Projects/Biz-BE/Database/bin/Debug/net8.0/Domain.Users.pdb
+/Users/savvycom/Projects/Biz-BE/Database/bin/Debug/net8.0/Shared.Infra.pdb
+/Users/savvycom/Projects/Biz-BE/Database/bin/Debug/net8.0/Shared.Domain.pdb
+/Users/savvycom/Projects/Biz-BE/Database/obj/Debug/net8.0/Database.sourcelink.json
+/Users/savvycom/Projects/Biz-BE/Database/obj/Debug/net8.0/Database.csproj.CopyComplete
+/Users/savvycom/Projects/Biz-BE/Database/bin/Debug/net8.0/appsettings.Development.json
+/Users/savvycom/Projects/Biz-BE/Database/bin/Debug/net8.0/appsettings.json

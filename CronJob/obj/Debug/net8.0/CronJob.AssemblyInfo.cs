@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CronJob")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8ae95f164d5dc9fdbd19ea73e36d35d34d1d923c")]
 [assembly: System.Reflection.AssemblyProductAttribute("CronJob")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CronJob")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

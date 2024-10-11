@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Domain.Users.Users.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Shared.Infra
 {
     public class AppDbContext : DbContext
     {
+        public DbSet<User> Users { get; set; }
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
             

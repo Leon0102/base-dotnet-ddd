@@ -3,48 +3,26 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Database.Base
 {
-    public interface IEntityBase<TKey>
+    public abstract class BaseEntity
     {
-        TKey Id { get; set; }
-    }
+        // Common properties for all entities
+        public Guid Id { get; set; }
 
-    public interface IDeleteEntity
-    {
-        bool IsDeleted { get; set; }
-    }
+        public DateTime CreatedAt { get; set; }
 
-    public interface IDeleteEntity<TKey> : IDeleteEntity, IEntityBase<TKey>
-    {
-    }
+        public DateTime UpdatedAt { get; set; }
 
-    public interface IAuditEntity
-    {
-        DateTime CreatedDate { get; set; }
-        string CreatedBy { get; set; }
-        DateTime? UpdatedDate { get; set; }
-        string UpdatedBy { get; set; }
-    }
-    public interface IAuditEntity<TKey> : IAuditEntity, IDeleteEntity<TKey>
-    {
-    }
+        public BaseEntity()
+        {
+            Id = Guid.NewGuid(); // Automatically assign a new unique Id
+            CreatedAt = DateTime.UtcNow; // Automatically set creation timestamp
+            UpdatedAt = DateTime.UtcNow; // Initially the same as CreatedAt
+        }
 
-    public abstract class EntityBase<TKey> : IEntityBase<TKey>
-    {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public virtual TKey Id { get; set; }
-    }
-
-    public abstract class DeleteEntity<TKey> : EntityBase<TKey>, IDeleteEntity<TKey>
-    {
-        public bool IsDeleted { get; set; }
-    }
-
-    public abstract class AuditEntity<TKey> : DeleteEntity<TKey>, IAuditEntity<TKey>
-    {
-        public DateTime CreatedDate { get; set; }
-        public string CreatedBy { get; set; }
-        public DateTime? UpdatedDate { get; set; }
-        public string UpdatedBy { get; set; }
+        // Optional method to update the 'UpdatedAt' timestamp when entity is modified
+        public void UpdateTimestamp()
+        {
+            UpdatedAt = DateTime.UtcNow;
+        }
     }
 }
