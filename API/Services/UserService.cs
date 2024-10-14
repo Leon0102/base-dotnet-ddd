@@ -1,10 +1,13 @@
+using System.Security.Cryptography;
 using Domain.Auth.Auth;
 using Domain.Auth.Auth.Models;
 using Domain.Auth.Auth.Models.AccountViewModels;
 using Domain.Users.Users.Entities;
 using Domain.Users.Users.Interface;
+using EmailSender.Interface;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Primitives;
+using Shared.Domain.Constants;
 using Shared.Services.Helpers;
 
 namespace API.Services;
@@ -16,8 +19,13 @@ public interface IUserService
     Task RevokeToken(string token, string ipAddress);
     IEnumerable<User> GetAll();
     Task<User> GetById(string id);
-    Task<User> Create(RegisterViewModel model);
-    Task<User>  Register(RegisterViewModel model, StringValues requestHeader);
+    Task<User> Create(CreateAccountViewModel model);
+    Task<User>  Register(CreateAccountViewModel model, StringValues requestHeader);
+    Task<User> Update(string id, UpdateAccountViewModel model);
+    void VerifyEmail(string token);
+    Task ForgotPassword(ForgotPasswordViewModel model, string origin);
+    void ValidateResetToken(ValidateResetTokenViewModel model);
+    Task ResetPassword(ResetPasswordViewModel model);
 }
 
 public class UserService : IUserService
@@ -25,15 +33,18 @@ public class UserService : IUserService
     private readonly IUserRepository _userRepository;
     private readonly IJwtUtils _jwtUtils;
     private readonly AppSettings _appSettings;
+    private readonly IEmailService _emailService;
 
     public UserService(
         IUserRepository userRepository,
         IJwtUtils jwtUtils,
-        IOptions<AppSettings> appSettings)
+        IOptions<AppSettings> appSettings,
+        IEmailService emailService)
     {
         _userRepository = userRepository;
         _jwtUtils = jwtUtils;
         _appSettings = appSettings.Value;
+        _emailService = emailService;
     }
 
     public async Task<AuthenticateResponse> Authenticate(LoginViewModel model, string ipAddress)
@@ -114,7 +125,7 @@ public class UserService : IUserService
         return user;
     }
 
-    public async Task<User> Create(RegisterViewModel model)
+    public async Task<User> Create(CreateAccountViewModel model)
     {
         var user = await _userRepository.FindByEmailAsync(model.Email);
         // validate
@@ -141,7 +152,7 @@ public class UserService : IUserService
         return newUser;
     }
 
-    public Task<User> Register(RegisterViewModel model, StringValues requestHeader)
+    public Task<User> Register(CreateAccountViewModel model, StringValues requestHeader)
     {
         // map model to new user object
         var user = new User()
@@ -162,7 +173,78 @@ public class UserService : IUserService
         return Task.FromResult(user);
     }
 
-    // helper methods
+    public Task<User> Update(string id, UpdateAccountViewModel model)
+    {
+        var user = _userRepository.GetByIdAsync(id).Result;
+
+        if (user == null)
+            throw new KeyNotFoundException("User not found");
+
+        // only admins can update role
+        if (user.Role != Role.Admin)
+            model.Role = user.Role;
+
+        // copy model to user and save
+        user.FirstName = model.FirstName;
+        user.LastName = model.LastName;
+        user.MiddleName = model.MiddleName;
+        user.Email = model.Email;
+        user.Role = model.Role;
+        if (!string.IsNullOrEmpty(model.Password))
+            user.Password = BCrypt.Net.BCrypt.HashPassword(model.Password);
+
+        if (!user.ValidOnAdd())
+            throw new AppException("Invalid user data");
+
+        _userRepository.Update(user);
+
+        return Task.FromResult(user);        
+    }
+
+    public void VerifyEmail(string token)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task ForgotPassword(ForgotPasswordViewModel model, string origin)
+    {
+        var account = await _userRepository.FindByEmailAsync(model.Email);
+
+        // always return ok response to prevent email enumeration
+        if (account == null) return;
+
+        // create reset token that expires after 1 day
+        account.ResetToken = randomTokenString();
+        account.ResetTokenExpires = DateTime.UtcNow.AddDays(1);
+
+        _userRepository.Update(account);
+
+        // send email
+        sendPasswordResetEmail(account, origin);
+    }
+
+    public void ValidateResetToken(ValidateResetTokenViewModel model)
+    {
+        var account = _userRepository.GetByResetToken(model.Token);
+
+        if (account == null)
+            throw new AppException("Invalid token");
+    }
+
+    public async Task ResetPassword(ResetPasswordViewModel model)
+    {
+        var account = await _userRepository.GetByResetToken(model.Token);
+
+        if (account == null)
+            throw new AppException("Invalid token");
+
+        // update password and remove reset token
+        account.Password = BCrypt.Net.BCrypt.HashPassword(model.Password);
+        account.ResetToken = null;
+
+        _userRepository.Update(account);
+    }
+
 
     private async Task<User> GetUserByRefreshToken(string token)
     {
@@ -209,4 +291,77 @@ public class UserService : IUserService
         token.ReasonRevoked = reason;
         token.ReplacedByToken = replacedByToken;
     }
+    
+    private string randomTokenString()
+    {
+        using var rngCryptoServiceProvider = new RNGCryptoServiceProvider();
+        var randomBytes = new byte[40];
+        rngCryptoServiceProvider.GetBytes(randomBytes);
+        // convert random bytes to hex string
+        return BitConverter.ToString(randomBytes).Replace("-", "");
+    }
+    
+    // private void sendVerificationEmail(User account, string origin)
+    //     {
+    //         string message;
+    //         if (!string.IsNullOrEmpty(origin))
+    //         {
+    //             var verifyUrl = $"{origin}/account/verify-email?token={account.VerificationToken}";
+    //             message = $@"<p>Please click the below link to verify your email address:</p>
+    //                          <p><a href=""{verifyUrl}"">{verifyUrl}</a></p>";
+    //         }
+    //         else
+    //         {
+    //             message = $@"<p>Please use the below token to verify your email address with the <code>/accounts/verify-email</code> api route:</p>
+    //                          <p><code>{account.VerificationToken}</code></p>";
+    //         }
+    //
+    //         _emailService.Send(
+    //             to: account.Email,
+    //             subject: "Sign-up Verification API - Verify Email",
+    //             html: $@"<h4>Verify Email</h4>
+    //                      <p>Thanks for registering!</p>
+    //                      {message}"
+    //         );
+    //     }
+    //
+    //     private void sendAlreadyRegisteredEmail(string email, string origin)
+    //     {
+    //         string message;
+    //         if (!string.IsNullOrEmpty(origin))
+    //             message = $@"<p>If you don't know your password please visit the <a href=""{origin}/account/forgot-password"">forgot password</a> page.</p>";
+    //         else
+    //             message = "<p>If you don't know your password you can reset it via the <code>/accounts/forgot-password</code> api route.</p>";
+    //
+    //         _emailService.Send(
+    //             to: email,
+    //             subject: "Sign-up Verification API - Email Already Registered",
+    //             html: $@"<h4>Email Already Registered</h4>
+    //                      <p>Your email <strong>{email}</strong> is already registered.</p>
+    //                      {message}"
+    //         );
+    //     }
+
+        private void sendPasswordResetEmail(User account, string origin)
+        {
+            string message;
+            if (!string.IsNullOrEmpty(origin))
+            {
+                var resetUrl = $"{origin}/account/reset-password?token={account.ResetToken}";
+                message = $@"<p>Please click the below link to reset your password, the link will be valid for 1 day:</p>
+                             <p><a href=""{resetUrl}"">{resetUrl}</a></p>";
+            }
+            else
+            {
+                message = $@"<p>Please use the below token to reset your password with the <code>/accounts/reset-password</code> api route:</p>
+                             <p><code>{account.ResetToken}</code></p>";
+            }
+
+            _emailService.Send(
+                to: account.Email,
+                subject: "Sign-up Verification API - Reset Password",
+                html: $@"<h4>Reset Password Email</h4>
+                         {message}"
+            );
+        }
 }

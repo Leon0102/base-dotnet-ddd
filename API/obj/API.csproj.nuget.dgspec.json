@@ -35,6 +35,9 @@
               "/Users/savvycom/Projects/Biz-BE/Domain.Users/Domain.Users.csproj": {
                 "projectPath": "/Users/savvycom/Projects/Biz-BE/Domain.Users/Domain.Users.csproj"
               },
+              "/Users/savvycom/Projects/Biz-BE/EmailSender/EmailSender.csproj": {
+                "projectPath": "/Users/savvycom/Projects/Biz-BE/EmailSender/EmailSender.csproj"
+              },
               "/Users/savvycom/Projects/Biz-BE/Shared.Infra/Shared.Infra.csproj": {
                 "projectPath": "/Users/savvycom/Projects/Biz-BE/Shared.Infra/Shared.Infra.csproj"
               },
@@ -331,6 +334,72 @@
         }
       }
     },
+    "/Users/savvycom/Projects/Biz-BE/EmailSender/EmailSender.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/savvycom/Projects/Biz-BE/EmailSender/EmailSender.csproj",
+        "projectName": "EmailSender",
+        "projectPath": "/Users/savvycom/Projects/Biz-BE/EmailSender/EmailSender.csproj",
+        "packagesPath": "/Users/savvycom/.nuget/packages/",
+        "outputPath": "/Users/savvycom/Projects/Biz-BE/EmailSender/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/savvycom/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/Users/savvycom/Projects/Biz-BE/Shared.Services/Shared.Services.csproj": {
+                "projectPath": "/Users/savvycom/Projects/Biz-BE/Shared.Services/Shared.Services.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "MailKit": {
+              "target": "Package",
+              "version": "[4.8.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/opt/homebrew/Cellar/dotnet/8.0.8_1/libexec/sdk/8.0.108/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
     "/Users/savvycom/Projects/Biz-BE/Shared.Domain/Shared.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -482,9 +551,6 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/Users/savvycom/Projects/Biz-BE/Domain.Users/Domain.Users.csproj": {
-                "projectPath": "/Users/savvycom/Projects/Biz-BE/Domain.Users/Domain.Users.csproj"
-              },
               "/Users/savvycom/Projects/Biz-BE/Shared.Infra/Shared.Infra.csproj": {
                 "projectPath": "/Users/savvycom/Projects/Biz-BE/Shared.Infra/Shared.Infra.csproj"
               }

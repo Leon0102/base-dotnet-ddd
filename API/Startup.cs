@@ -94,6 +94,9 @@ namespace API
             // custom jwt auth middleware
             app.UseMiddleware<JwtMiddleware>();
             
+            // Add custom Permission Middleware
+            // app.UseMiddleware<PermissionMiddleware>();
+            
             app.UseHttpsRedirection();
 
             app.UseRouting();

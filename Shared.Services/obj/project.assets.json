@@ -1085,7 +1085,6 @@
   },
   "projectFileDependencyGroups": {
     "net8.0": [
-      "Domain.Users >= 1.0.0",
       "Microsoft.EntityFrameworkCore >= 8.0.8",
       "Npgsql.EntityFrameworkCore.PostgreSQL >= 8.0.8",
       "Shared.Infra >= 1.0.0",
@@ -1117,9 +1116,6 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "/Users/savvycom/Projects/Biz-BE/Domain.Users/Domain.Users.csproj": {
-              "projectPath": "/Users/savvycom/Projects/Biz-BE/Domain.Users/Domain.Users.csproj"
-            },
             "/Users/savvycom/Projects/Biz-BE/Shared.Infra/Shared.Infra.csproj": {
               "projectPath": "/Users/savvycom/Projects/Biz-BE/Shared.Infra/Shared.Infra.csproj"
             }

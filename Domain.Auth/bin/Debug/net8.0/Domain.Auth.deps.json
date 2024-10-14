@@ -226,7 +226,6 @@
       },
       "Shared.Services/1.0.0": {
         "dependencies": {
-          "Domain.Users": "1.0.0",
           "Microsoft.EntityFrameworkCore": "8.0.8",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "8.0.8",
           "Shared.Infra": "1.0.0",

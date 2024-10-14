@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "uOBQlBk+x2FZTMORtPMy2IhJoPjIE0zmYh/ip75PlNY=",
+  "Hash": "Dmv3cNrBv6iY5BFw8vcWcEj7KemrtWrj27shwk3TdaA=",
   "Source": "API",
   "BasePath": "_content/API",
   "Mode": "Default",
@@ -32,6 +32,17 @@
       "Identity": "/Users/savvycom/Projects/Biz-BE/Domain.Users/Domain.Users.csproj",
       "Version": 2,
       "Source": "Domain.Users",
+      "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
+      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier;SelfContained",
+      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
+      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier;SelfContained"
+    },
+    {
+      "Identity": "/Users/savvycom/Projects/Biz-BE/EmailSender/EmailSender.csproj",
+      "Version": 2,
+      "Source": "EmailSender",
       "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
       "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
       "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier;SelfContained",

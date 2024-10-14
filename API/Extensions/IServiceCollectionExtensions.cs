@@ -2,6 +2,8 @@
 using API.Services;
 using Database.Repository;
 using Domain.Users.Users.Interface;
+using EmailSender.Implementation;
+using EmailSender.Interface;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Shared.Domain.Interfaces;
@@ -32,7 +34,8 @@ namespace API.Extensions
 
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
-            return services.AddScoped<IUserService, UserService>();
+            return services.AddScoped<IUserService, UserService>()
+                .AddScoped<IEmailService, EmailService>();
         }
         
         private static IServiceCollection AddPostgresQL<T>(this IServiceCollection services, string connectionString) where T : DbContext

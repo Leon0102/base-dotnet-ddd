@@ -20,21 +20,9 @@ public class UserRepository : Repository<User>, IUserRepository
         throw new NotImplementedException();
     }
 
-    public Task<User> GetByIdAsync(string id)
+    public Task<User?> GetByIdAsync(string id)
     {
-        try
-        {
-            var user = _dbContext.Users.FirstOrDefault(x => x.Id.ToString() == id);
-            if (user == null)
-            {
-                throw new Exception("User not found");
-            }
-            return Task.FromResult(user);
-        }
-        catch (Exception e)
-        {
-            throw new Exception(e.Message);
-        }
+        return Task.FromResult(_dbContext.Users.FirstOrDefault(x => x.Id.ToString() == id));
     }
 
     Task<User> IUserRepository.FindByEmailAsync(string email)
@@ -93,6 +81,17 @@ public class UserRepository : Repository<User>, IUserRepository
     public Task<User> GetByRefreshToken(string token)
     {
         throw new NotImplementedException();
+    }
+
+    public Task<User> GetByResetToken(string resetToken)
+    {
+        var user = _dbContext.Users.FirstOrDefault(x => x.ResetToken == resetToken);
+        if (user == null)
+        {
+            throw new Exception("User not found");
+        }
+        
+        return Task.FromResult(user);
     }
 
     public async Task FindByEmailAsync(string email)

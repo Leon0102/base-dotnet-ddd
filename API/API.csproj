@@ -36,6 +36,7 @@
       <ProjectReference Include="..\Database\Database.csproj" />
       <ProjectReference Include="..\Domain.Auth\Domain.Auth.csproj" />
       <ProjectReference Include="..\Domain.Users\Domain.Users.csproj" />
+      <ProjectReference Include="..\EmailSender\EmailSender.csproj" />
       <ProjectReference Include="..\Shared.Infra\Shared.Infra.csproj" />
       <ProjectReference Include="..\Shared.Services\Shared.Services.csproj" />
     </ItemGroup>

@@ -1,18 +1,23 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Domain.Users.Users.Interface;
+using Shared.Domain.Constants;
+
 namespace Domain.Users.Users.Entities
 {
     public partial class User
     {
         public User(string firstName, string lastName, string middleName, string email, string password,
-            List<RefreshToken> refreshTokens)
+            Role role, List<RefreshToken> refreshTokens,
+            string resetToken = null)
         {
             FirstName = firstName;
             LastName = lastName;
             MiddleName = middleName;
             Email = email;
             Password = HashPassword(password);
+            Role = role;
             RefreshTokens = refreshTokens;
+            ResetToken = resetToken;
         }
 
         public User()

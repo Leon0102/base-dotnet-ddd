@@ -3,10 +3,10 @@ using Domain.Auth.Auth;
 using Domain.Auth.Auth.Models.AccountViewModels;
 using Domain.Users.Users.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Shared.Domain.Constants;
 
 namespace API.Controllers;
 
-[Authorize]
 [ApiController]
 [Route("[controller]")]
 public class UsersController : ControllerBase
@@ -29,7 +29,7 @@ public class UsersController : ControllerBase
     
     [AllowAnonymous]
     [HttpPost("register")]
-    public async Task<IActionResult> Register(RegisterViewModel model)
+    public async Task<IActionResult> Register(CreateAccountViewModel model)
     {
         var user = await _userService.Register(model, Request.Headers["origin"]);
         return Ok(new { message = "Registration successful, please check your email for verification instructions" });
@@ -65,15 +65,54 @@ public class UsersController : ControllerBase
         _userService.RevokeToken(token, ipAddress());
         return Ok(new { message = "Token revoked" });
     }
+    
+    [HttpPatch("{id}")]
+    public async Task<IActionResult> Update(string id, UpdateAccountViewModel model)
+    {
+        var user = (User)HttpContext.Items["User"];
+        if (id != user.Id.ToString() && user.Role != Role.Admin)
+            return Unauthorized(new { message = "Unauthorized" });
+        // only admins can update role
+        if (user.Role != Role.Admin)
+            model.Role = user.Role;
+        user = await _userService.Update(id, model);
+        return Ok(user);
+    }
+    
+    [HttpPost("forgot-password")]
+    public IActionResult ForgotPassword(ForgotPasswordViewModel model)
+    {
+        _userService.ForgotPassword(model, Request.Headers["origin"]);
+        return Ok(new { message = "Please check your email for password reset instructions" });
+    }
+    
+    [HttpPost("validate-reset-token")]
+    public IActionResult ValidateResetToken(ValidateResetTokenViewModel model)
+    {
+        _userService.ValidateResetToken(model);
+        return Ok(new { message = "Token is valid" });
+    }
+    
+    [HttpPost("reset-password")]
+    public IActionResult ResetPassword(ResetPasswordViewModel model)
+    {
+        _userService.ResetPassword(model);
+        return Ok(new { message = "Password reset successful, you can now login" });
+    }
 
     [HttpGet]
+    [Authorize([Role.Admin, Role.FM_Admin])]
+    [HasPermission(Permissions.Users_View)]
     public IActionResult GetAll()
     {
         var users = _userService.GetAll();
         return Ok(users);
     }
 
+    
     [HttpGet("{id}")]
+    [Authorize([Role.Admin, Role.FM_Admin])]
+    [HasPermission(Permissions.Users_View)]
     public IActionResult GetById(string id)
     {
         var user = _userService.GetById(id);

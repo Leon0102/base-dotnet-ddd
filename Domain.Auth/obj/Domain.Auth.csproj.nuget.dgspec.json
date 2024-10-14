@@ -289,9 +289,6 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/Users/savvycom/Projects/Biz-BE/Domain.Users/Domain.Users.csproj": {
-                "projectPath": "/Users/savvycom/Projects/Biz-BE/Domain.Users/Domain.Users.csproj"
-              },
               "/Users/savvycom/Projects/Biz-BE/Shared.Infra/Shared.Infra.csproj": {
                 "projectPath": "/Users/savvycom/Projects/Biz-BE/Shared.Infra/Shared.Infra.csproj"
               }

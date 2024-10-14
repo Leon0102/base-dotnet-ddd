@@ -51,6 +51,22 @@ namespace Shared.Infra.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<DateTime?>("PasswordReset")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int[]>("Permissions")
+                        .IsRequired()
+                        .HasColumnType("integer[]");
+
+                    b.Property<string>("ResetToken")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("ResetTokenExpires")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("Role")
+                        .HasColumnType("integer");
+
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
